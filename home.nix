@@ -1,8 +1,10 @@
 { confif, pkgs, ... }:
 
 {
-  home.username = "ekku";
-  home.stateVersion = "25.11";
+  home = {
+    username = "ekku";
+    stateVersion = "25.11";
+  }
 
   programs.git = {
     enable = true;
