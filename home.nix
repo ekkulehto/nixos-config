@@ -4,7 +4,7 @@
   home = {
     username = "ekku";
     stateVersion = "25.11";
-  }
+  };
 
   programs.git = {
     enable = true;
