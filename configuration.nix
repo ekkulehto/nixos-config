@@ -52,7 +52,6 @@
     vulkan-tools
     mesa-demos
     wofi
-    resources
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
