@@ -8,6 +8,7 @@
       ./packages.nix
       ./modules/nixos/users/ekku.nix
       ./modules/nixos/environment-variables.nix
+      ./modules/nixos/hyprland.nix
     ];
 
   services.getty.autologinUser = "ekku";
