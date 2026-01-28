@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
       ./boot.nix
       ./packages.nix
-      ./module/nixos/users/ekku.nix
+      ./modules/nixos/users/ekku.nix
     ];
 
   services.getty.autologinUser = "ekku";
