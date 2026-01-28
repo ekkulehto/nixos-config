@@ -10,6 +10,7 @@
       ./modules/nixos/environment-variables.nix
       ./modules/nixos/hyprland.nix
       ./modules/nixos/locale.nix
+      ./modules/nixos/hardware.nix
     ];
 
   services.getty.autologinUser = "ekku";
@@ -18,12 +19,6 @@
   networking.networkmanager.enable = true;
 
 
-  hardware.enableRedistributableFirmware = true;
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
 
 
 
