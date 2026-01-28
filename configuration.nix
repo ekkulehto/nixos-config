@@ -29,10 +29,6 @@
     enable32Bit = true;
   };
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
 
 
 
