@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./boot.nix
       ./packages.nix
+      ./module/nixos/users/ekku.nix
     ];
 
   services.getty.autologinUser = "ekku";
@@ -32,13 +33,6 @@
     xwayland.enable = true;
   };
 
-  users.users.ekku = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-    ];
-  };
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
