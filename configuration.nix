@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ./boot.nix
+      ./packages.nix
     ];
 
   services.getty.autologinUser = "ekku";
@@ -39,18 +40,6 @@
     ];
   };
 
-  programs.firefox.enable = true;
-  environment.systemPackages = with pkgs; [
-    vim 
-    wget
-    waybar
-    kitty
-    git
-    hyprpaper
-    vulkan-tools
-    mesa-demos
-    wofi
-  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
