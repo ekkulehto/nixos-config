@@ -6,5 +6,6 @@
     ripgrep
     moonlight-qt
     ddcutil
+    edid-decode
   ];
 }
