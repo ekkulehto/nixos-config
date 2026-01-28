@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+
       ./boot.nix
       ./packages.nix
       ./modules/nixos/users/ekku.nix
@@ -13,10 +14,8 @@
       ./modules/nixos/hardware.nix
       ./modules/nixos/networking.nix
       ./modules/nixos/login.nix
+      ./modules/nixos/nix-settings.nix
     ];
 
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
-
 }
