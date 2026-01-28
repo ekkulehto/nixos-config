@@ -6,6 +6,9 @@
       ./hardware-configuration.nix
 
       ../../modules/nixos/core
+
+      ../../modules/nixos/users/ekku.nix
+
       ../../modules/nixos/programs/hyprland.nix
       ../../modules/nixos/programs/firefox.nix
     ];
