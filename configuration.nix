@@ -4,10 +4,8 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./boot.nix
     ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   services.getty.autologinUser = "ekku";
 
