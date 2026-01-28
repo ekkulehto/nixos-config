@@ -16,14 +16,6 @@
 
   services.getty.autologinUser = "ekku";
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-
-
-
-
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
 
