@@ -1,21 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./modules/home-manager/programs/git.nix
+  ];
+
+
   home = {
     username = "ekku";
     stateVersion = "25.11";
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Ekku Lehto";
-        email = "ekkulehto@proton.me";
-      };
-      init.defaultBranch = "main";
-    };
-  };
 
   programs.bash = {
     enable = true;
