@@ -12,9 +12,9 @@
       ./modules/nixos/locale.nix
       ./modules/nixos/hardware.nix
       ./modules/nixos/networking.nix
+      ./modules/nixos/login.nix
     ];
 
-  services.getty.autologinUser = "ekku";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
