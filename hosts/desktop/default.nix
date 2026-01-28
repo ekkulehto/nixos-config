@@ -9,7 +9,8 @@
       ../../modules/nixos/packages.nix
       ../../modules/nixos/users/ekku.nix
       ../../modules/nixos/environment-variables.nix
-      ../../modules/nixos/hyprland.nix
+      ../../modules/nixos/programs/hyprland.nix
+      ../../modules/nixos/programs/firefox.nix
       ../../modules/nixos/locale.nix
       ../../modules/nixos/hardware.nix
       ../../modules/nixos/networking.nix
