@@ -3,7 +3,7 @@
 {
   imports = [
     ./boot.nix
-    ./environment-variables.nix
+    ./env.nix
     ./hardware.nix
     ./locale.nix
     ./login.nix
