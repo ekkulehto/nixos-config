@@ -19,7 +19,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.ekku = import ./home.nix;
+            users.ekku = import ./homes/ekku;
             backupFileExtension = "backup";
           };
         }
