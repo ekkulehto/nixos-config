@@ -11,5 +11,5 @@
     ./networking.nix
     ./nix-settings.nix
     ./packages.nix
-  ]
+  ];
 }
