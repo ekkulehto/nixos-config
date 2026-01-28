@@ -3,6 +3,8 @@
 {
   imports = [
     ./modules/home-manager/programs/git.nix
+    ./modules/home-manager/programs/bash.nix
+    ./modules/home-manager/programs/neovim.nix
   ];
 
 
