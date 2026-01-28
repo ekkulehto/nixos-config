@@ -4,6 +4,8 @@
   imports = [
     ../../modules/home-manager/programs
     ../../modules/home-manager/packages
+
+    ./wm/hyprland
   ];
 
   home = {
