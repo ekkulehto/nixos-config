@@ -7,7 +7,7 @@
 
       ../../modules/nixos/core
 
-      ../../modules/nixos/users/ekku.nix
+      ../../modules/nixos/users
 
       ../../modules/nixos/programs
     ];
