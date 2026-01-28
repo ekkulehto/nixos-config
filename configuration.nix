@@ -7,6 +7,7 @@
       ./boot.nix
       ./packages.nix
       ./modules/nixos/users/ekku.nix
+      ./modules/nixos/environment-variables.nix
     ];
 
   services.getty.autologinUser = "ekku";
@@ -38,9 +39,4 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
 
-  environment.variables = {
-    "EDITOR" = "nvim";
-    "VISUAL" = "nvim";
-    "SUDO_EDITOR" = "nvim";
-  };
 }
