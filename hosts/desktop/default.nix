@@ -13,6 +13,8 @@
 
       ../../modules/nixos/desktops/hyprland
 
+      ../../modules/nixos/graphics/amd
+
       ../../modules/nixos/users/ekku
     ];
 
