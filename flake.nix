@@ -12,6 +12,9 @@
   outputs = { self, nixpkgs, home-manager, ... }: {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {
+        autologinUser = "ekku";
+      };
       modules = [
         ./hosts/desktop
         home-manager.nixosModules.home-manager
