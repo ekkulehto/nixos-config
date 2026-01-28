@@ -9,8 +9,7 @@
 
       ../../modules/nixos/users/ekku.nix
 
-      ../../modules/nixos/programs/hyprland.nix
-      ../../modules/nixos/programs/firefox.nix
+      ../../modules/nixos/programs
     ];
 
   system.stateVersion = "25.11";
