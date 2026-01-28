@@ -11,6 +11,7 @@
       ./modules/nixos/hyprland.nix
       ./modules/nixos/locale.nix
       ./modules/nixos/hardware.nix
+      ./modules/nixos/networking.nix
     ];
 
   services.getty.autologinUser = "ekku";
