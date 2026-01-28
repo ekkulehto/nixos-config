@@ -11,6 +11,8 @@
 
       ../../modules/nixos/programs
 
+      ../../modules/nixos/desktops/hyprland
+
       ../../modules/nixos/users/ekku
     ];
 
