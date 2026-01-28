@@ -3,7 +3,7 @@
 {
   imports = [
     ../../modules/home-manager/programs
-    ../../modules/home-manager/packages.nix
+    ../../modules/home-manager/packages
   ];
 
   home = {
