@@ -5,7 +5,5 @@
     wl-clipboard
     ripgrep
     moonlight-qt
-    ddcutil
-    edid-decode
   ];
 }
