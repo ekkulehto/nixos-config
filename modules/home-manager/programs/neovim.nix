@@ -9,7 +9,7 @@
 
     plugins = with pkgs.vimPlugins; [
       nvim-autopairs   
-    ]
+    ];
     
     extraLuaConfig = ''
       vim.opt.expandtab = true
