@@ -35,6 +35,7 @@
     vim.lsp.enable("nil_ls")
 
     vim.lsp.config("qmlls", {
+      cmd = { "qmlls", "-E" },
       capabilities = capabilities,
     })
     vim.lsp.enable("qmlls")
