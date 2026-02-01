@@ -28,14 +28,15 @@
     })
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local lspconfig = require("lspconfig")
 
-    lspconfig.nil_ls.setup({
+    vim.lsp.config("nil_ls", {
       capabilities = capabilities,
     })
+    vim.lsp.enable("nil_ls")
 
-    lspconfig.qmlls.setup({
+    vim.lsp.config("qmlls", {
       capabilities = capabilities,
     })
+    vim.lsp.enable("qmlls")
   '';
 }
