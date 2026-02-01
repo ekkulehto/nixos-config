@@ -5,5 +5,6 @@
     wl-clipboard
     ripgrep
     moonlight-qt
+    quickshell
   ];
 }
