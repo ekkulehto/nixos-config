@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./config.nix
     ./plugins.nix
+    ./config.nix
   ];
 
   programs.neovim = {
