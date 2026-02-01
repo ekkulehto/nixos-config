@@ -5,6 +5,7 @@
     nvim-autopairs   
 
     nvim-lspconfig
+    nvim-cmp
     cmp-nvim-lsp
     cmp-path
   ];
