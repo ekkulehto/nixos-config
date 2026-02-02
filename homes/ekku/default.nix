@@ -4,7 +4,6 @@
   imports = [
     ../../modules/home-manager/programs
     ../../modules/home-manager/packages
-    ../../modules/home-manager/env/default.nix
 
     ./wm/hyprland
   ];

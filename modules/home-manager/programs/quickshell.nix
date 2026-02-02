@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  programs.qt = {
-    enable = true;
-  };
-}
