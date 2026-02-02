@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./moonlight-autostart.nix
+    ./moonlight-autostream.nix
   ];
 }

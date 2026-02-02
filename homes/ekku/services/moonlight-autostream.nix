@@ -31,7 +31,7 @@ in
     };
 
     Service = {
-      ExecStart = moonlightLoop;
+      ExecStart = "moonlight-autostream";
       Restart = "always";
       RestartSec = 2;
 

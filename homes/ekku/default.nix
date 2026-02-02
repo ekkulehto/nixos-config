@@ -7,6 +7,7 @@
 
     ./wm/hyprland
     ./shells/noctalia
+    ./services
   ];
 
   home = {
