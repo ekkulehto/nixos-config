@@ -6,6 +6,7 @@
     ../../modules/home-manager/packages
 
     ./wm/hyprland
+    ./shells/noctalia
   ];
 
   home = {

@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  home.packages = with pkgs; [
-    wl-clipboard
-    ripgrep
-    moonlight-qt
-    quickshell
+  imports = [
+    ./stable.nix
+    ./unstable.nix
   ];
 }
