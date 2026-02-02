@@ -6,7 +6,7 @@ let
   host = "192.168.8.3";
   app  = "Desktop";
 
-  moonlightLoop = pkgs.writeShellScript "moonlight-autostream" ''
+  moonlight-autostream = pkgs.writeShellScript "moonlight-autostream" ''
     set -euo pipefail
 
     # Odota että Wayland/Hyprland on oikeasti pystyssä
@@ -31,7 +31,7 @@ in
     };
 
     Service = {
-      ExecStart = "moonlight-autostream";
+      ExecStart = "${moonlight-autostream}";
       Restart = "always";
       RestartSec = 2;
 
