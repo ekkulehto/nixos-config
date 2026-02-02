@@ -7,6 +7,7 @@
     iosevka
     hack-font
     source-code-pro
+    inter
   ];
 
   fonts.fontconfig.enable = true;
