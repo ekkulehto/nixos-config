@@ -13,7 +13,8 @@ let
     text = ''
       set -euo pipefail
 
-      while [ -z "''${WAYLAND_DISPLAY:-}" ] || [ -z "''${XDG_RUNTIME_DIR:-}" ]; do
+      # Odota että graafinen sessio on valmis + XWayland DISPLAY olemassa (xcb tarvitsee DISPLAYn)
+      while [ -z "''${XDG_RUNTIME_DIR:-}" ] || [ -z "''${WAYLAND_DISPLAY:-}" ] || [ -z "''${DISPLAY:-}" ]; do
         sleep 1
       done
 
@@ -44,7 +45,8 @@ in
       TimeoutStopSec = 5;
 
       Environment = [
-        "QT_QPA_PLATFORM=wayland"
+        "QT_QPA_PLATFORM=xcb"
+        "SDL_VIDEODRIVER=x11"
       ];
     };
 
