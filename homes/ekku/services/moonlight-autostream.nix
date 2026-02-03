@@ -13,9 +13,20 @@ let
     text = ''
       set -euo pipefail
 
-      while [ -z "''${XDG_RUNTIME_DIR:-}" ] || [ -z "''${WAYLAND_DISPLAY:-}" ] || [ -z "''${DISPLAY:-}" ]; do
+      # Odota että user runtime on olemassa
+      while [ -z "''${XDG_RUNTIME_DIR:-}" ]; do
         sleep 1
       done
+
+      # Odota että XWayland/X11 socket ilmestyy (xcb tarvitsee tämän)
+      while [ ! -S /tmp/.X11-unix/X0 ] && [ ! -S /tmp/.X11-unix/X1 ] && [ ! -S /tmp/.X11-unix/X2 ]; do
+        sleep 1
+      done
+
+      # Aseta DISPLAY sen mukaan mikä socket löytyi
+      if [ -S /tmp/.X11-unix/X0 ]; then export DISPLAY=":0"; fi
+      if [ -S /tmp/.X11-unix/X1 ]; then export DISPLAY=":1"; fi
+      if [ -S /tmp/.X11-unix/X2 ]; then export DISPLAY=":2"; fi
 
       while true; do
         moonlight stream "${host}" "${app}" --display-mode fullscreen || true
