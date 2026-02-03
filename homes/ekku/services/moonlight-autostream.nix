@@ -13,7 +13,6 @@ let
     text = ''
       set -euo pipefail
 
-      # Odota että graafinen sessio on valmis + XWayland DISPLAY olemassa (xcb tarvitsee DISPLAYn)
       while [ -z "''${XDG_RUNTIME_DIR:-}" ] || [ -z "''${WAYLAND_DISPLAY:-}" ] || [ -z "''${DISPLAY:-}" ]; do
         sleep 1
       done
@@ -31,8 +30,8 @@ in
   systemd.user.services.moonlight-autostream = {
     Unit = {
       Description = "Moonlight autostream to ${host}";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = [ "default.target" ];
+      PartOf = [ "default.target" ];
     };
 
     Service = {
@@ -51,7 +50,7 @@ in
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = [ "default.target" ];
     };
   };
 }
