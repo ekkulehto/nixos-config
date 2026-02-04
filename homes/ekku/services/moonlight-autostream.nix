@@ -10,36 +10,32 @@ in
   systemd.user.services.moonlight-autostream = {
     Unit = {
       Description = "Moonlight Autostream (X11 Mode)";
-      # Käynnistyy graafisen session mukana
-      After = [ "graphical-session.target" "network-online.target" ];
+      # Käytetään hyprland-session.targetia, se on NixOS:ssa luotettavampi
+      After = [ "hyprland-session.target" "network-online.target" ];
       Wants = [ "network-online.target" ];
-      PartOf = [ "graphical-session.target" ];
+      # Jos Hyprland sammuu, sammuta tämäkin
+      PartOf = [ "hyprland-session.target" ];
     };
 
     Service = {
-      # XWayland saattaa käynnistyä pienellä viiveellä Hyprlandissa,
-      # joten sleep on tässä X11-tilassa vielä tärkeämpi kuin Waylandissa.
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
-      
-      # Käynnistyskomento (sama kuin aiemmin)
+      # Käynnistyskomento
       ExecStart = ''
         ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
       '';
 
       Restart = "always";
-      RestartSec = "3s";
-      
-      # PAKOTETAAN X11 / XCB
+      RestartSec = "2s";      
+
       Environment = [
         "SDL_VIDEODRIVER=x11"
         "QT_QPA_PLATFORM=xcb"
-        # Jos kuva skaalautuu väärin XWaylandissa, voit kokeilla muuttaa tätä (0 tai 1)
         "QT_AUTO_SCREEN_SCALE_FACTOR=0"
+        "DISPLAY=:0" 
       ];
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = [ "hyprland-session.target" ];
     };
   };
 }
