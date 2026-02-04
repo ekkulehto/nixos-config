@@ -11,6 +11,5 @@
     vulkan-tools
     mesa-demos
     wofi
-    home-manager
   ];
 }
