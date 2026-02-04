@@ -6,7 +6,6 @@
     ripgrep
     moonlight-qt
     quickshell
-    yazi
     hyprshot
     gpu-screen-recorder
     freetube
