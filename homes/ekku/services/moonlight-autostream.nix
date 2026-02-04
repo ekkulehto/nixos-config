@@ -9,17 +9,19 @@ in
 
   systemd.user.services.moonlight-autostream = {
     Unit = {
-      Description = "Moonlight Autostream (Native Wayland)";
+      Description = "Moonlight Autostream (X11 Mode)";
+      # Käynnistyy graafisen session mukana
       After = [ "graphical-session.target" "network-online.target" ];
       Wants = [ "network-online.target" ];
       PartOf = [ "graphical-session.target" ];
     };
 
     Service = {
-      # Pieni viive
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
+      # XWayland saattaa käynnistyä pienellä viiveellä Hyprlandissa,
+      # joten sleep on tässä X11-tilassa vielä tärkeämpi kuin Waylandissa.
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
       
-      # Käynnistyskomento
+      # Käynnistyskomento (sama kuin aiemmin)
       ExecStart = ''
         ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
       '';
@@ -27,11 +29,12 @@ in
       Restart = "always";
       RestartSec = "3s";
       
+      # PAKOTETAAN X11 / XCB
       Environment = [
-        "SDL_VIDEODRIVER=wayland"
-        "QT_QPA_PLATFORM=wayland"
-        "QT_AUTO_SCREEN_SCALE_FACTOR=1"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION=1"
+        "SDL_VIDEODRIVER=x11"
+        "QT_QPA_PLATFORM=xcb"
+        # Jos kuva skaalautuu väärin XWaylandissa, voit kokeilla muuttaa tätä (0 tai 1)
+        "QT_AUTO_SCREEN_SCALE_FACTOR=0"
       ];
     };
 
