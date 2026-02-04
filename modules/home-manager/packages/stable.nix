@@ -10,6 +10,5 @@
     hyprshot
     gpu-screen-recorder
     freetube
-    grayjay
   ];
 }
