@@ -9,5 +9,6 @@
     yazi
     hyprshot
     gpu-screen-recorder
+    freetube
   ];
 }
