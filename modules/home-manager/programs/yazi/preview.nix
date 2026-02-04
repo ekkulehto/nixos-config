@@ -7,7 +7,7 @@
     p7zip
     unar
     jq
-    poppler_utils
+    poppler-utils
     fd
     fzf
     zoxide
