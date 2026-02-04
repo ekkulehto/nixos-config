@@ -7,5 +7,6 @@
     moonlight-qt
     quickshell
     yazi
+    hyprshot
   ];
 }
