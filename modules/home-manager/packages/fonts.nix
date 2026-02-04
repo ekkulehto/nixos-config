@@ -7,6 +7,7 @@
     iosevka
     hack-font
     source-code-pro
+    inter
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only 
   ];
