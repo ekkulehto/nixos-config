@@ -1,4 +1,4 @@
-{ lib, noctalia, pkgsUnstable, enableNoctalia ? false, ... }:
+{ lib, noctalia, pkgs, enableNoctalia ? false, ... }:
 
 {
   imports = lib.optionals enableNoctalia [
@@ -8,9 +8,8 @@
   programs.noctalia-shell = lib.mkIf enableNoctalia {
     enable = true;
 
-    package = pkgsUnstable.noctalia-shell;
+    package = noctalia.packages.${pkgs.system}.default;
 
     # settings = { ... };
   };
 }
-
