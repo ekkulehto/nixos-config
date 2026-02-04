@@ -10,14 +10,9 @@ in
   systemd.user.services.moonlight-autostream = {
     Unit = {
       Description = "Moonlight Autostream";
-      After = [ "graphical-session.target" "network-online.target" ];
-      Wants = [ "network-online.target" ];
-      PartOf = [ "graphical-session.target" ];
     };
 
     Service = {
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
-      
       ExecStart = ''
         ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
       '';
@@ -30,10 +25,6 @@ in
         "QT_QPA_PLATFORM=xcb"
         "QT_AUTO_SCREEN_SCALE_FACTOR=0"
       ];
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
     };
   };
 }
