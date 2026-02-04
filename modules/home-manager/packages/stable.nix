@@ -8,5 +8,6 @@
     quickshell
     yazi
     hyprshot
+    gpu-screen-recorder
   ];
 }
