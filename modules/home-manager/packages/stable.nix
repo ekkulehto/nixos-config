@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -12,4 +12,8 @@
     freetube
     grayjay
   ];
+
+  # Enable grayjay as unfree package
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "grayjay" ];
 }
