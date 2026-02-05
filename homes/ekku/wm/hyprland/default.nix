@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   xdg.enable = true;
@@ -7,4 +7,10 @@
     source = ./config;
     recursive = true;
   };
+
+
+  environment.systemPackages = with pkgs; [
+    gnome.adwaita-icon-theme
+    gnome-themes-extra
+  ];
 }
