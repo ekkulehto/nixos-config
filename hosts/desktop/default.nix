@@ -21,6 +21,6 @@
   system.stateVersion = "25.11";
 
   nixpkgs.overlays = [
-    (import ./overlays/noctalia-ipc-cb-left-fix.nix)
+    (import ../../overlays/noctalia-ipc-cb-left-fix.nix)
   ];
 }
