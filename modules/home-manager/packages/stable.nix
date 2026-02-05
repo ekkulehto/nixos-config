@@ -9,5 +9,6 @@
     hyprshot
     gpu-screen-recorder
     freetube
+    ripdrag
   ];
 }
