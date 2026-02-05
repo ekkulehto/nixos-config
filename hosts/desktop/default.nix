@@ -20,7 +20,9 @@
       ../../overlays/noctalia-ipc-cb-left-fix.nix
     ];
 
-    system.stateVersion = "25.11";
+  system.stateVersion = "25.11";
 
-    nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (import ./overlays/noctalia-ipc-cb-left-fix.nix)
+  ];
 }
