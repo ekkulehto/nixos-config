@@ -3,24 +3,15 @@ set -euo pipefail
 
 SERVICE="moonlight-autostream.service"
 
-# IPC-komento: useimmilla tämä toimii
-IPC=(qs -c noctalia-shell ipc call)
-
-# Joillain asennuksilla (NixOS flake) docs sanoo että voi käyttää "noctalia-shell" suoraan.
-# Tämä fallback yrittää sitä, jos binary löytyy.
-if command -v noctalia-shell >/dev/null 2>&1; then
-  IPC=(noctalia-shell ipc call)
-fi
+IPC=(noctalia-shell ipc call)
 
 toast() {
-  # Args: title body icon type duration
   local title="$1"
   local body="${2:-}"
   local icon="${3:-}"
   local type="${4:-notice}"
   local duration="${5:-3000}"
 
-  # Rakennetaan JSON turvallisesti (pieni escaping lainausmerkeille)
   title=${title//\"/\\\"}
   body=${body//\"/\\\"}
   icon=${icon//\"/\\\"}
@@ -39,8 +30,8 @@ toast() {
 
 if systemctl --user is-active --quiet "$SERVICE"; then
   systemctl --user stop "$SERVICE"
-  toast "Moonlight" "Stream to 192.168.8.3 stopped" "player-stop" "notice" 3000
+  toast "Moonlight" "Remote desktop to Windows ended" "player-stop" "notice" 3000
 else
   systemctl --user start "$SERVICE"
-  toast "Moonlight" "Stream to 192.168.8.3 started" "player-play" "notice" 3000
+  toast "Moonlight" "Remote desktop to Windows started" "player-play" "notice" 3000
 fi
