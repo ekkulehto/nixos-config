@@ -8,8 +8,7 @@
     recursive = true;
   };
 
-
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     gnome.adwaita-icon-theme
     gnome-themes-extra
   ];
