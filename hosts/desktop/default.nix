@@ -18,5 +18,7 @@
       ../../modules/nixos/users/ekku
     ];
 
-  system.stateVersion = "25.11";
+    system.stateVersion = "25.11";
+
+    nixpkgs.config.allowUnfree = true;
 }
