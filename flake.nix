@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
-
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -25,13 +24,15 @@
     };
   in {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      inherit system;
-
       specialArgs = {
         autologinUser = "ekku";
       };
 
       modules = [
+        { 
+          nixpkgs.hostPlatform = system; 
+        }
+
         ./hosts/desktop
         home-manager.nixosModules.home-manager
         {
