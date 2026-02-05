@@ -9,6 +9,5 @@
     hyprshot
     gpu-screen-recorder
     freetube
-    webex
   ];
 }
