@@ -16,8 +16,6 @@
       ../../modules/nixos/graphics/amd
 
       ../../modules/nixos/users/ekku
-      
-      ../../overlays/noctalia-ipc-cb-left-fix.nix
     ];
 
   system.stateVersion = "25.11";
