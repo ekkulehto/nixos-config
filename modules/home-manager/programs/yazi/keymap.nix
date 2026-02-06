@@ -24,7 +24,6 @@
         # }
 
         {
-          [[mgr.prepend_keymap]];
           on   = [ "<A-d>" ];
           run  = "plugin hyprdnd-for-yazi";
           desc = "Hyprland DnD overlay (hyprdnd-for-yazi)";
