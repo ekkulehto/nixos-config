@@ -24,9 +24,9 @@
         # }
 
         {
-          on   = [ "<A-d>" ];
-          run  = "plugin hyprdnd-for-yazi";
-          desc = "Hyprland DnD overlay (hyprdnd-for-yazi)";
+          on  = "<A-d>";
+          run = "shell --block 'yazi-dndctl toggle'";
+          desc = "Toggle yazi-dnd overlay (daemon foundation mode)";
         }
       ];
     };
