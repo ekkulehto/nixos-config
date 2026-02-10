@@ -9,5 +9,6 @@
     gpu-screen-recorder
     freetube
     ripdrag
+    fastfetch
   ];
 }
