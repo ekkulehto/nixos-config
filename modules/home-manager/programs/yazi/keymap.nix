@@ -7,7 +7,7 @@
     keymap = {
       mgr.prepend_keymap = [
         {
-          on = [ "K" ];
+          on = [ "<A-k>" ];
           run = "shell --orphan --confirm kitty";
           desc = "Open kitty here";
         }
