@@ -3,7 +3,8 @@
 {
   imports = [
     ../../modules/home-manager/programs
-    ../../modules/home-manager/packages/shared
+    ../../modules/home-manager/packages/common
+    ../../modules/home-manager/packages/extra/desktop
 
     ./wm/hyprland
     ./shells/noctalia
