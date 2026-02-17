@@ -11,7 +11,7 @@
 
       ../../modules/nixos/packages
 
-      ../../modules/nixos/programs
+      ../../modules/nixos/extra
 
       ../../modules/nixos/desktops/hyprland
 
