@@ -57,5 +57,34 @@
         }
       ];
     };
+
+    nixosConfigurations.openclaw = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        autologinUser = "ekku";
+        llm-agents = inputs.llm-agents;
+      };
+
+      modules = [
+        { 
+          nixpkgs.hostPlatform = system; 
+        }
+
+        ./hosts/openclaw
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            extraSpecialArgs = {
+              inherit pkgsUnstable;
+            };
+
+            users.ekku = import ./homes/ekku;
+            backupFileExtension = "backup";
+          };
+        }
+      ];
+    };
   };
 }
