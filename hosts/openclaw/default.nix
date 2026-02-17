@@ -11,7 +11,7 @@
 
       ../../modules/nixos/packages
 
-      ../../modules/nixos/users/openclaw
+      ../../modules/nixos/users/ekku
     ];
 
   system.stateVersion = "25.11";
