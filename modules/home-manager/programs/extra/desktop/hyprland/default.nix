@@ -4,8 +4,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     
-    # Set the main configuration file that sources all others
-    settings.hyprland.conf = builtins.readFile ./hyprland.conf;
+    # Use extraConfig to add source directives that include all other config files
+    extraConfig = builtins.readFile ./hyprland.conf;
   };
 
   # Create symlinks for all the individual config files
