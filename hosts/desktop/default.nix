@@ -7,6 +7,8 @@
 
       ../../modules/nixos/core
 
+      ../../modules/nixos/networking/desktop
+
       ../../modules/nixos/packages
 
       ../../modules/nixos/programs

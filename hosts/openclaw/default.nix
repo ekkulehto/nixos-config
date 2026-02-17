@@ -7,6 +7,8 @@
 
       ../../modules/nixos/core
 
+      ../../modules/nixos/networking/openclaw
+
       ../../modules/nixos/packages
 
       ../../modules/nixos/users/openclaw
