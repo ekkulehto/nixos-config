@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    vim 
-    wget
-    git
-    wofi
-  ];
+  imports = [
+    ./stable/default.nix
+    ./unstable/default.nix
+  ]
 }
