@@ -14,9 +14,14 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+     };
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, noctalia, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, noctalia, llm-agents, ... }:
   let
     system = "x86_64-linux";
     pkgsUnstable = import nixpkgs-unstable {
@@ -41,7 +46,7 @@
             useUserPackages = true;
 
             extraSpecialArgs = {
-              inherit pkgsUnstable noctalia;
+              inherit pkgsUnstable noctalia llm-agents;
               enableNoctalia = true;
             };
 
