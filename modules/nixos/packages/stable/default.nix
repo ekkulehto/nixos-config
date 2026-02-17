@@ -5,6 +5,5 @@
     vim 
     wget
     git
-    wofi
   ];
 }
