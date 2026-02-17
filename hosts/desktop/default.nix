@@ -18,6 +18,8 @@
       ../../modules/nixos/graphics/amd
 
       ../../modules/nixos/users/ekku
+
+      ../../profiles
     ];
 
   system.stateVersion = "25.11";
