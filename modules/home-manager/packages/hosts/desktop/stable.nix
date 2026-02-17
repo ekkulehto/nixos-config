@@ -2,13 +2,10 @@
 
 {
   home.packages = with pkgs; [
-    wl-clipboard
-    ripgrep
     moonlight-qt
     hyprshot
+    ripdrag
     gpu-screen-recorder
     freetube
-    ripdrag
-    fastfetch
   ];
 }
