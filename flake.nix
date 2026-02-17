@@ -32,6 +32,7 @@
       specialArgs = {
         autologinUser = "ekku";
         llm-agents = inputs.llm-agents;
+        noctalia = inputs.noctalia;
       };
 
       modules = [
@@ -48,7 +49,6 @@
 
             extraSpecialArgs = {
               inherit pkgsUnstable noctalia;
-              enableNoctalia = true;
             };
 
             users.ekku = import ./homes/ekku;

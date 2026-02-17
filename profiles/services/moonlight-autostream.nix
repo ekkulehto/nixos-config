@@ -5,14 +5,10 @@ let
   app  = "Desktop";
 in
 {
-  home.packages = [ pkgs.moonlight-qt ];
-
   systemd.user.services.moonlight-autostream = {
-    Unit = {
-      Description = "Moonlight Autostream";
-    };
+    description = "Moonlight Autostream";
 
-    Service = {
+    serviceConfig = {
       ExecStart = ''
         ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
       '';

@@ -1,15 +1,7 @@
-{ lib, noctalia, pkgs, enableNoctalia ? false, ... }:
+{ lib, noctalia, pkgs, ... }:
 
 {
-  imports = lib.optionals enableNoctalia [
-    noctalia.homeModules.default
+  environment.systemPackages = lib.mkDefault [
+    noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-
-  programs.noctalia-shell = lib.mkIf enableNoctalia {
-    enable = true;
-
-    package = noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-    # settings = { ... };
-  };
 }

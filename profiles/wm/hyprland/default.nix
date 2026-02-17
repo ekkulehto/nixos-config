@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  xdg.enable = true;
-
-  xdg.configFile."hypr" = {
-    source = ./config;
-    recursive = true;
-  };
-
-  home.packages = with pkgs; [
-    adwaita-icon-theme
-    gnome-themes-extra
-  ];
+  # Hyprland configuration is handled in home manager
+  # This module just ensures Hyprland is available at the system level
 }
