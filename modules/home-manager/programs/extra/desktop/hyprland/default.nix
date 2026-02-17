@@ -4,20 +4,17 @@
   wayland.windowManager.hyprland = {
     enable = true;
     
-    # Set the main configuration file
-    settings = {
-      # Main config that sources all others
-      hyprland.conf = builtins.readFile ./hyprland.conf;
-      
-      # Individual config files
-      monitors.conf = builtins.readFile ./monitors.conf;
-      env.conf = builtins.readFile ./env.conf;
-      look-and-feel.conf = builtins.readFile ./look-and-feel.conf;
-      input.conf = builtins.readFile ./input.conf;
-      permissions.conf = builtins.readFile ./permissions.conf;
-      windows-and-workspaces.conf = builtins.readFile ./windows-and-workspaces.conf;
-      keybindings.conf = builtins.readFile ./keybindings.conf;
-      autostart.conf = builtins.readFile ./autostart.conf;
-    };
+    # Set the main configuration file that sources all others
+    settings.hyprland.conf = builtins.readFile ./hyprland.conf;
   };
+
+  # Create symlinks for all the individual config files
+  xdg.configFile."hypr/monitors.conf".text = builtins.readFile ./monitors.conf;
+  xdg.configFile."hypr/env.conf".text = builtins.readFile ./env.conf;
+  xdg.configFile."hypr/look-and-feel.conf".text = builtins.readFile ./look-and-feel.conf;
+  xdg.configFile."hypr/input.conf".text = builtins.readFile ./input.conf;
+  xdg.configFile."hypr/permissions.conf".text = builtins.readFile ./permissions.conf;
+  xdg.configFile."hypr/windows-and-workspaces.conf".text = builtins.readFile ./windows-and-workspaces.conf;
+  xdg.configFile."hypr/keybindings.conf".text = builtins.readFile ./keybindings.conf;
+  xdg.configFile."hypr/autostart.conf".text = builtins.readFile ./autostart.conf;
 }
