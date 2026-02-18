@@ -1,7 +1,7 @@
 { inputs, mkHost, ... }:
 
 {
-  flake.nixosConfigurations.desktop = mkHost {
+  flake.nixosConfigurations.workstation = mkHost {
     hostModule = ../hosts/workstation;
     hmUserPath = ../home/users/ekku/workstation;
 
