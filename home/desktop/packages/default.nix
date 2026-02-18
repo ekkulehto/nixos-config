@@ -1,4 +1,4 @@
-{ pkgs, noctalia, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -8,6 +8,5 @@
     ripdrag
     gpu-screen-recorder
     freetube
-    noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

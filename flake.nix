@@ -19,6 +19,11 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
      };
+     
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+     };
   };
 
   outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, ... }:
@@ -49,6 +54,7 @@
               inherit pkgsUnstable;
               noctalia = inputs.noctalia;
               llm-agents = inputs.llm-agents;
+              nvf = inputs.nvf;
             };
 
             users.ekku = import (./home/users/ekku/desktop);
@@ -77,7 +83,8 @@
 
             extraSpecialArgs = {
               inherit pkgsUnstable;
-                llm-agents = inputs.llm-agents;
+              llm-agents = inputs.llm-agents;
+              nvf = inputs.nvf;
             };
 
             users.ekku = import (./home/users/ekku/openclaw);
