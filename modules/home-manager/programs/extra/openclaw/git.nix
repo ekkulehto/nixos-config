@@ -3,12 +3,12 @@
 {
   programs.git = {
     enable = true;
-    # settings = {
-    #   user = {
-    #     name = "";
-    #     email = "";
-    #   };
-    #   init.defaultBranch = "main";
-    # };
+    settings = {
+      user = {
+        name = "Ekku Lehto";
+        email = "ekkulehto@proton.me";
+      };
+      init.defaultBranch = "main";
+    };
   };
 }
