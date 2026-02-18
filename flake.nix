@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -25,7 +24,12 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
      };
-  };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+};
 
   outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, ... }:
   let
