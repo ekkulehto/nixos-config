@@ -3,7 +3,8 @@
 {
   imports = [
     ./yazi
-    ./firefox.nix
     ./nvf
+    ./firefox.nix
+    ./git.nix
   ];
 }
