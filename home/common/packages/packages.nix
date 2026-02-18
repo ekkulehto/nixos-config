@@ -1,4 +1,4 @@
-{ pkgs, llmAgents, ... }:
+{ pkgs, llm-agents, ... }:
 
 let
   basePackages = with pkgs; [
@@ -8,7 +8,7 @@ let
     wget
   ];
 
-  llmPackages = with llmAgents.packages.${pkgs.stdenv.hostPlatform.system}; [
+  llmPackages = with llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
     mistral-vibe
   ];
 in
