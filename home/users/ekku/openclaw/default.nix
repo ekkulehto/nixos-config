@@ -3,7 +3,7 @@
 {
   imports = [
     ../../../common
-    ../../../openclaw
+    ../../../hosts/openclaw
   ];
 
   home = {

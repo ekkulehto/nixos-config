@@ -3,7 +3,8 @@
 {
   imports = [
     ../../../common
-    ../../../workstation
+    ../../../hosts/workstation
+    ../../../../desktop
   ];
 
   home = {
