@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -36,6 +37,7 @@
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       specialArgs = {
         autologinUser = "ekku";
+        inherit inputs;
       };
 
       modules = [
