@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./unstable.nix
-  ];
-}

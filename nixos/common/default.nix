@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./packages
-    ./programs
     ./system
   ];
 }

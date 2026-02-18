@@ -21,7 +21,7 @@
      };
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, noctalia, llm-agents, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, ... }:
   let
     system = "x86_64-linux";
     pkgsUnstable = import nixpkgs-unstable {
@@ -31,8 +31,6 @@
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       specialArgs = {
         autologinUser = "ekku";
-        llm-agents = inputs.llm-agents;
-        noctalia = inputs.noctalia;
       };
 
       modules = [
@@ -48,7 +46,9 @@
             useUserPackages = true;
 
             extraSpecialArgs = {
-              inherit pkgsUnstable noctalia;
+              inherit pkgsUnstable;
+              noctalia = inputs.noctalia;
+              llm-agents = inputs.llm-agents;
             };
 
             users.ekku = import (./home/users/ekku/desktop);
@@ -61,7 +61,6 @@
     nixosConfigurations.openclaw = nixpkgs.lib.nixosSystem {
       specialArgs = {
         autologinUser = "ekku";
-        llm-agents = inputs.llm-agents;
       };
 
       modules = [
@@ -78,6 +77,7 @@
 
             extraSpecialArgs = {
               inherit pkgsUnstable;
+                llm-agents = inputs.llm-agents;
             };
 
             users.ekku = import (./home/users/ekku/openclaw);
