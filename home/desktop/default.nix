@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./wm/hyprland
-    ./shells/noctalia
+    ./packages
+    ./programs
     ./services
   ];
 }

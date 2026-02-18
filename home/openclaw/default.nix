@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./stable
-    ./unstable
+    ./programs
   ];
 }

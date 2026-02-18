@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./stable.nix
+    ./packages.nix
     ./fonts.nix
   ];
 }

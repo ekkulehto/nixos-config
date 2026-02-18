@@ -4,22 +4,16 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./networking.nix
+      ./graphics.nix
+      
+      ../../nixos/common
+      ../../nixos/desktop
+      ../../nixos/users/ekku
 
-      ../../modules/nixos/core
-
-      ../../modules/nixos/networking/desktop
-
-      ../../modules/nixos/packages
-
-      ../../modules/nixos/programs
-
-      ../../modules/nixos/desktops/hyprland
-
-      ../../modules/nixos/graphics/amd
-
-      ../../modules/nixos/users/ekku
-
-      ../../profiles
+      ../../home/common
+      ../../home/desktop
+      ../../home/users/ekku
     ];
 
   system.stateVersion = "25.11";
