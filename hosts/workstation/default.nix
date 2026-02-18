@@ -8,7 +8,7 @@
       ./graphics.nix
       
       ../../nixos/common
-      ../../nixos/workstation
+      ../../nixos/hosts/workstation
       ../../nixos/users/ekku
     ];
 
