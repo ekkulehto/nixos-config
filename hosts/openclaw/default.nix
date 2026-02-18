@@ -9,8 +9,6 @@
       ../../nixos/common
       ../../nixos/users/ekku
 
-      ../../home/common
-      ../../home/openclaw
       ../../home/users/ekku
     ];
 

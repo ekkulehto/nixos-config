@@ -11,8 +11,6 @@
       ../../nixos/desktop
       ../../nixos/users/ekku
 
-      ../../home/common
-      ../../home/desktop
       ../../home/users/ekku
     ];
 
