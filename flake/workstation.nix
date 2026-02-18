@@ -2,8 +2,8 @@
 
 {
   flake.nixosConfigurations.desktop = mkHost {
-    hostModule = ../hosts/desktop;
-    hmUserPath = ../home/users/ekku/desktop;
+    hostModule = ../hosts/workstation;
+    hmUserPath = ../home/users/ekku/workstation;
 
     specialArgs = {
       autologinUser = "ekku";

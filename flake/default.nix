@@ -40,7 +40,7 @@ let
 in
 {
   imports = [
-    ./desktop.nix
+    ./workstation.nix
     ./openclaw.nix
   ];
 
