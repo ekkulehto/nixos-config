@@ -6,11 +6,13 @@ let
 in
 {
   systemd.user.services.moonlight-autostream = {
-    serviceConfig = {
+    Unit = {
       Description = "Moonlight Autostream";
-      ExecStart = ''
-        ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
-      '';
+      After = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${lib.getExe pkgs.moonlight-qt} stream \"${host}\" \"${app}\" --quit-after";
 
       Restart = "always";
       RestartSec = "2s";
@@ -20,6 +22,10 @@ in
         "QT_QPA_PLATFORM=xcb"
         "QT_AUTO_SCREEN_SCALE_FACTOR=0"
       ];
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 }
