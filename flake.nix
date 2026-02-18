@@ -51,7 +51,7 @@
               inherit pkgsUnstable noctalia;
             };
 
-            users.ekku = import (./home/users/ekku/default.nix);
+            users.ekku = import (./home/users/ekku/desktop);
             backupFileExtension = "backup";
           };
         }
@@ -80,7 +80,7 @@
               inherit pkgsUnstable;
             };
 
-            users.ekku = import (./home/users/ekku/default.nix);
+            users.ekku = import (./home/users/ekku/openclaw);
             backupFileExtension = "backup";
           };
         }
