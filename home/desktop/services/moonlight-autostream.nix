@@ -6,9 +6,8 @@ let
 in
 {
   systemd.user.services.moonlight-autostream = {
-    description = "Moonlight Autostream";
-
     serviceConfig = {
+      Description = "Moonlight Autostream";
       ExecStart = ''
         ${lib.getExe pkgs.moonlight-qt} stream "${host}" "${app}" --quit-after
       '';
