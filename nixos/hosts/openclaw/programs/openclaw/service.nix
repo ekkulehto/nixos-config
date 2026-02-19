@@ -36,8 +36,8 @@ in
           Environment = [
             "HOME=${cfg.stateDir}"
             "OPENCLAW_HOME=${cfg.stateDir}"
-            "OPENCLAW_STATE_DIR=${cfg.stateDir}"
-            "OPENCLAW_CONFIG_PATH=${cfg.stateDir}/openclaw.json"
+            "OPENCLAW_STATE_DIR=${cfg.stateDir}/.openclaw"
+            "OPENCLAW_CONFIG_PATH=${cfg.stateDir}/.openclaw/openclaw.json"
             "OPENCLAW_NIX_MODE=1"
           ];
 
@@ -50,8 +50,8 @@ in
           Restart = "always";
           RestartSec = "1s";
 
-          StandardOutput = "append:/tmp/openclaw/openclaw-gateway.log";
-          StandardError = "append:/tmp/openclaw/openclaw-gateway.log";
+          StandardOutput = "append:${cfg.stateDir}/.openclaw/openclaw-gateway.log";
+          StandardError  = "append:${cfg.stateDir}/.openclaw/openclaw-gateway.log";
         }
         // hardening;
     };
