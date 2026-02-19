@@ -34,7 +34,7 @@ let
               { inherit inputs pkgsUnstable; }
               // hmExtraSpecialArgs;
 
-            users.ekku = import hmUserPath { inherit inputs; };
+            users.ekku = import hmUserPath;
             backupFileExtension = "backup";
           };
         }
