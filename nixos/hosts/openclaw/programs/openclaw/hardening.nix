@@ -13,7 +13,7 @@
 
   RestrictSUIDSGID = true;
   LockPersonality = true;
-  MemoryDenyWriteExecute = true;
+  MemoryDenyWriteExecute = false;
 
   ReadWritePaths = [ stateDir ];
   UMask = "0077";

@@ -3,7 +3,7 @@
 let
   cfg = config.services.openclaw;
 
-  openclawPkgs = inputs.nix-openclaw.packages.${pkgs.system};
+  openclawPkgs = inputs.nix-openclaw.packages.${pkgs.stdenv.hostPlatform.system};
 
   configTemplate = pkgs.writeText "openclaw.json" (builtins.toJSON cfg.config);
 
