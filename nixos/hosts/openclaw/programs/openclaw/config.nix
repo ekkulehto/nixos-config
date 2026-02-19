@@ -31,6 +31,8 @@
       groups = { "*" = { requireMention = true; }; };
     };
 
+    allowFrom = [ 1653058581 ];
+
     agents.defaults = {
       userTimezone = "Europe/Helsinki";
 
