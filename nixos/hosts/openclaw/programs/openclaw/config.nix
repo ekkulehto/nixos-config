@@ -29,7 +29,7 @@
       tokenFile = "/run/agenix/telegram-bot-token";
       dmPolicy = "pairing";
       groups = { "*" = { requireMention = true; }; };
-      allowFrom = [ 1653058580 ];
+      allowFrom = [ 1653058581 ];
     };
 
     agents.defaults = {
