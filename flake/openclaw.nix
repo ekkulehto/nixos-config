@@ -14,7 +14,7 @@
       nvf = inputs.nvf;
     };
 
-    extraModule = {
+    extraModules = {
       imports = [ 
         inputs.determinate.nixosModules.default 
         inputs.agenix.nixosModules.default
