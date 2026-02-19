@@ -4,7 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
+    agenix.url = "github:ryantm/agenix";
     
     nix-openclaw = {
       url = "github:openclaw/nix-openclaw";

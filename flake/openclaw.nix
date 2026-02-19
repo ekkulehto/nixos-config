@@ -17,6 +17,7 @@
     extraModule = {
       imports = [ 
         inputs.determinate.nixosModules.default 
+        inputs.agenix.nixosModules.default
       ];
 
       nixpkgs.overlays = [
