@@ -12,7 +12,7 @@ let
     , hmUserPath
     , hmExtraSpecialArgs ? {}
     , specialArgs ? {}
-    , extraModules ? []
+    , extraModule ? {}
     }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = specialArgs // { inherit inputs; };
@@ -20,7 +20,7 @@ let
       modules = [
         { nixpkgs.hostPlatform = system; }
 
-        extraModules
+        extraModule
 
         hostModule
 

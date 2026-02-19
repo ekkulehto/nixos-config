@@ -14,9 +14,14 @@
       nvf = inputs.nvf;
     };
 
-    extraModules = [
-      inputs.determinate.nixosModules.default
-      { nixpkgs.overlays = [ inputs.nix-openclaw.overlays.default ]; }
-    ];
+    extraModule = {
+      imports = [ 
+        inputs.determinate.nixosModules.default 
+      ];
+
+      nixpkgs.overlays = [
+        inputs.nix-openclaw.overlays.default
+      ];
+    };
   };
 }
