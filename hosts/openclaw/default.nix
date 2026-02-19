@@ -7,6 +7,7 @@
       ./networking.nix
       
       ../../nixos/common
+      ../../nixos/hosts/openclaw
       ../../nixos/users/ekku
       ../../nixos/users/openclaw
     ];
