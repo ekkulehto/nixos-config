@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./programs
-    ./packages
+    ./openclaw.nix
   ];
 }
