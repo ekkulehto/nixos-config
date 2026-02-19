@@ -31,10 +31,10 @@ let
             useUserPackages = true;
 
             extraSpecialArgs =
-              { inherit pkgsUnstable; }
+              { inherit inputs pkgsUnstable; }
               // hmExtraSpecialArgs;
 
-            users.ekku = import hmUserPath;
+            users.ekku = import hmUserPath { inherit inputs; };
             backupFileExtension = "backup";
           };
         }

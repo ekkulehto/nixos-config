@@ -6,6 +6,6 @@
   ];
 
   programs.openclaw = {
-    # ...
+    enable = true;
   };
 }
