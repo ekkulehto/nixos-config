@@ -12,7 +12,7 @@ in
       group = cfg.group;
       home = cfg.stateDir;
       createHome = true;
-      shell = pkgs.shadow.nologin;
+      shell = "${pkgs.shadow}/bin/nologin";
     };
   };
 }
