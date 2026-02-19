@@ -1,7 +1,8 @@
+
 { ... }:
 
 {
   imports = [
-    ./bash.nix
+    ./openclaw
   ];
 }

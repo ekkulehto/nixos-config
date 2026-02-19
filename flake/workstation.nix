@@ -14,5 +14,11 @@
       llm-agents = inputs.llm-agents;
       nvf = inputs.nvf;
     };
+
+    extraModules = {
+      imports = [ 
+        inputs.agenix.nixosModules.default
+      ];
+    };
   };
 }

@@ -8,6 +8,7 @@
       
       ../../nixos/common
       ../../nixos/users/ekku
+      ../../nixos/users/openclaw
     ];
 
   system.stateVersion = "25.11";
