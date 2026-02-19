@@ -13,5 +13,10 @@
       llm-agents = inputs.llm-agents;
       nvf = inputs.nvf;
     };
+
+    extraModules = [
+      inputs.determinate.nixosModules.default
+      { nixpkgs.overlays = [ inputs.nix-openclaw.overlays.default ]; }
+    ];
   };
 }
