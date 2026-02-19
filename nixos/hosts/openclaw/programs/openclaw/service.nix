@@ -45,7 +45,7 @@ in
 
           ExecStartPre = initScript;
 
-          ExecStart = "${openclawPkgs.openclaw-gateway}/bin/openclaw-gateway gateway --port ${toString cfg.port}";
+          ExecStart = "${lib.getExe' openclawPkgs.openclaw-tools.openclaw-gateway} gateway --port ${toString cfg.port}";
 
           Restart = "always";
           RestartSec = "1s";
