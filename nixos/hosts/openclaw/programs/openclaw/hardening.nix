@@ -1,4 +1,5 @@
-{ stateDir }:
+{ stateDir, searxngAllow ? [ ] }:
+
 {
   NoNewPrivileges = true;
   RemoveIPC = true;
@@ -52,11 +53,12 @@
 
   RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
 
-  # IPAddressDeny = [
-  #   "10.0.0.0/8"
-  #   "172.16.0.0/12"
-  #   "192.168.0.0/16"
-  #   "169.254.0.0/16"
-  # ];
+  IPAddressDeny = [
+    "10.0.0.0/8"
+    "172.16.0.0/12"
+    "192.168.0.0/16"
+    "169.254.0.0/16"
+  ];
+  IPAddressAllow = searxngAllow;
 }
 

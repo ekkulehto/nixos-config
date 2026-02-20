@@ -15,7 +15,10 @@ let
     configTemplate = configTemplate;
   };
 
-  hardening = (import ./hardening.nix) { stateDir = cfg.stateDir; };
+  hardening = (import ./hardening.nix) {
+    stateDir = cfg.stateDir;
+    searxngAllow = [ "10.30.0.103/32" ];
+  };
 in
 {
   config = lib.mkIf cfg.enable {
