@@ -45,7 +45,7 @@
       providers = {
         mistralvibe = {
           baseUrl = "https://api.mistral.ai/v1";
-          api = "openai-responses";
+          api = "openai-completions";
           apiKey = "\${MISTRAL_API_KEY}";
 
           models = [
