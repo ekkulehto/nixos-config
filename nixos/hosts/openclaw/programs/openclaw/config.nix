@@ -40,6 +40,24 @@
       };
     };
 
+    models = {
+      mode = "merge";
+      providers = {
+        mistralvibe = {
+          baseUrl = "https://api.mistral.ai/v1";
+          api = "openai-completions";
+          apiKey = "\${MISTRAL_API_KEY}";
+
+          models = [
+            {
+              id = "mistral-vibe-cli-latest";
+              name = "Mistral Vibe CLI Latest (Devstral 2)";
+            }
+          ];
+        };
+      };
+    };
+
     agents.defaults = {
       userTimezone = "Europe/Helsinki";
 
@@ -50,25 +68,6 @@
       models = {
         "mistral/mistral-vibe-cli-latest" = {
           alias = "devstral-2";
-        };
-      };
-    };
-
-    models = {
-      mode = "merge";
-      providers = {
-        mistral = {
-          models = [
-            {
-              id = "mistral-vibe-cli-latest";
-              name = "Mistral Vibe CLI (Devstral 2)";
-              contextWindow = 256000;
-              maxTokens = 8192;
-              reasoning = false;
-              input = [ "text" ];
-              cost = { input = 0; output = 0; cacheRead = 0; cacheWrite = 0; };
-            }
-          ];
         };
       };
     };
