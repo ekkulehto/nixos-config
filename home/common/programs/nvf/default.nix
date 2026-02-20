@@ -23,7 +23,6 @@
         shiftwidth = 2;
         smartindent = true;
         autoindent = true;
-        clipboard = "unnamedplus";
       };
 
       lineNumberMode = "relNumber";
