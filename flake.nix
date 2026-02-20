@@ -8,6 +8,8 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     agenix.url = "github:ryantm/agenix";
+
+    openclaw-skills.url = "github:openclaw/skills";
     
     nix-openclaw = {
       url = "github:openclaw/nix-openclaw";
