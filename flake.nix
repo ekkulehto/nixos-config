@@ -9,7 +9,10 @@
 
     agenix.url = "github:ryantm/agenix";
 
-    openclaw-skills.url = "github:openclaw/skills";
+    openclaw-skills = {
+      url = "github:openclaw/skills";
+      flake = false;
+    };
     
     nix-openclaw = {
       url = "github:openclaw/nix-openclaw";
