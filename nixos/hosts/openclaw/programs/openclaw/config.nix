@@ -43,7 +43,7 @@
     models = {
       mode = "merge";
       providers = {
-        mistralvibe = {
+        mistral = {
           baseUrl = "https://api.mistral.ai/v1";
           api = "openai-completions";
           apiKey = "\${MISTRAL_API_KEY}";
