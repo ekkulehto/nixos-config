@@ -44,7 +44,7 @@
       userTimezone = "Europe/Helsinki";
 
       model = {
-        primary = "mistral/mistral-vibe-cli-with-tools";
+        primary = "mistral/mistral-vibe-cli-latest";
       };
 
       models = {
