@@ -4,7 +4,7 @@ let
   ekku_user        = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKoF3DTqAs3ZGqUljH/R0RwFm14JBJD7EgBvmvCSqyn ekkulehto@proton.me";
 in
 {
-  "secrets/openclaw/telegram-bot-token.age".publicKeys = [ openclaw_host workstation_host ekku_user ];
-  "secrets/openclaw/openclaw.env.age".publicKeys       = [ openclaw_host workstation_host ekku_user ];
+  "openclaw/telegram-bot-token.age".publicKeys = [ openclaw_host workstation_host ekku_user ];
+  "openclaw/openclaw.env.age".publicKeys       = [ openclaw_host workstation_host ekku_user ];
 }
 
