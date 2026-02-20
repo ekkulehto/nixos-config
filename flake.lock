@@ -1005,6 +1005,22 @@
         "type": "github"
       }
     },
+    "openclaw-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771623164,
+        "narHash": "sha256-6EtnpmA4O9NcgAtS2Ttu86RPs4P9jnJBmCNoSHm2izc=",
+        "owner": "openclaw",
+        "repo": "skills",
+        "rev": "0d4723a0bdee57c083382afbcab8ac21a8ba1232",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openclaw",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1040,7 +1056,8 @@
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
-        "nvf": "nvf"
+        "nvf": "nvf",
+        "openclaw-skills": "openclaw-skills"
       }
     },
     "systems": {
