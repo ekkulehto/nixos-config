@@ -66,16 +66,16 @@
       userTimezone = "Europe/Helsinki";
 
       model = {
-        primary = "mistralvibe/mistral-vibe-cli-with-tools";
+        primary = "mistral/mistral-vibe-cli-latest";
       };
 
       models = {
-        "mistralvibe/mistral-vibe-cli-with-tools" = {
-          alias = "vibe-with-tools";
+        "mistral/mistral-vibe-cli-latest" = {
+          alias = "vibe";
         };
 
-        "mistralvibe/mistral-vibe-cli-latest" = {
-          alias = "vibe";
+        "mistral/mistral-vibe-cli-with-tools" = {
+          alias = "vibe-with-tools";
         };
       };
     };
