@@ -30,7 +30,7 @@
   CapabilityBoundingSet = "";
   AmbientCapabilities = "";
 
-  MemoryDenyWriteExecute = true;
+  MemoryDenyWriteExecute = false;
 
   SystemCallArchitectures = "native";
 
