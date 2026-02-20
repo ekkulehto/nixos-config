@@ -19,6 +19,11 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    systemd.tmpfiles.rules = [
+      "d ${cfg.stateDir} 0700 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.stateDir}/.openclaw 0700 ${cfg.user} ${cfg.group} - -"
+    ];
+
     systemd.services.openclaw-gateway = {
       description = "OpenClaw gateway (system)";
       wantedBy = [ "multi-user.target" ];
@@ -31,6 +36,7 @@ in
         {
           User = cfg.user;
           Group = cfg.group;
+
           WorkingDirectory = cfg.stateDir;
 
           Environment = [
@@ -42,6 +48,10 @@ in
           ];
 
           EnvironmentFile = config.age.secrets.openclaw-env.path;
+
+          LoadCredential = [
+            "telegram-bot-token:${config.age.secrets.telegram-bot-token.path}"
+          ];
 
           ExecStartPre = initScript;
 

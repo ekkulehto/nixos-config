@@ -26,10 +26,18 @@
     };
 
     channels.telegram = {
-      tokenFile = "/run/agenix/telegram-bot-token";
-      dmPolicy = "pairing";
-      groups = { "*" = { requireMention = true; }; };
+      enabled = true;
+
+      tokenFile = "\${CREDENTIALS_DIRECTORY}/telegram-bot-token";
+
+      configWrites = false;
+
+      dmPolicy = "allowlist";
       allowFrom = [ 1653058581 ];
+
+      groups = {
+        "*" = { requireMention = true; };
+      };
     };
 
     agents.defaults = {
