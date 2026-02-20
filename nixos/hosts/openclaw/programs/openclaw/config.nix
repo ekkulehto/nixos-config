@@ -45,13 +45,17 @@
       providers = {
         mistralvibe = {
           baseUrl = "https://api.mistral.ai/v1";
-          api = "openai-completions";
+          api = "openai-responses";
           apiKey = "\${MISTRAL_API_KEY}";
 
           models = [
             {
               id = "mistral-vibe-cli-latest";
-              name = "Mistral Vibe CLI Latest (Devstral 2)";
+              name = "Mistral Vibe CLI Latest";
+            }
+            {
+              id = "mistral-vibe-cli-with-tools";
+              name = "Mistral Vibe CLI With Tools";
             }
           ];
         };
@@ -62,12 +66,25 @@
       userTimezone = "Europe/Helsinki";
 
       model = {
+<<<<<<< HEAD
         primary = "mistral/mistral-vibe-cli-latest";
       };
 
       models = {
         "mistral/mistral-vibe-cli-latest" = {
           alias = "devstral-2";
+=======
+        primary = "mistralvibe/mistral-vibe-cli-with-tools";
+      };
+
+      models = {
+        "mistralvibe/mistral-vibe-cli-with-tools" = {
+          alias = "vibe-with-tools";
+        };
+
+        "mistralvibe/mistral-vibe-cli-latest" = {
+          alias = "vibe";
+>>>>>>> e7456f5 (fix: Try to fix the model not recognized by openclaw)
         };
       };
     };
