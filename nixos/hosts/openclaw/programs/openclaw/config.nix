@@ -48,8 +48,8 @@
       };
 
       models = {
-        "mistral/mistral-vibe-cli-with-tools" = {
-          alias = "vibe";
+        "mistral/mistral-vibe-cli-latest" = {
+          alias = "devstral-2";
         };
       };
     };
