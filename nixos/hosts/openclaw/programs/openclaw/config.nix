@@ -66,14 +66,6 @@
       userTimezone = "Europe/Helsinki";
 
       model = {
-<<<<<<< HEAD
-        primary = "mistral/mistral-vibe-cli-latest";
-      };
-
-      models = {
-        "mistral/mistral-vibe-cli-latest" = {
-          alias = "devstral-2";
-=======
         primary = "mistralvibe/mistral-vibe-cli-with-tools";
       };
 
@@ -84,7 +76,6 @@
 
         "mistralvibe/mistral-vibe-cli-latest" = {
           alias = "vibe";
->>>>>>> e7456f5 (fix: Try to fix the model not recognized by openclaw)
         };
       };
     };
