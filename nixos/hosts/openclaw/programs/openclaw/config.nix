@@ -27,17 +27,11 @@
 
     channels.telegram = {
       enabled = true;
-
       tokenFile = "\${CREDENTIALS_DIRECTORY}/telegram-bot-token";
-
       configWrites = false;
-
       dmPolicy = "allowlist";
       allowFrom = [ 1653058581 ];
-
-      groups = {
-        "*" = { requireMention = true; };
-      };
+      groups = { "*" = { requireMention = true; }; };
     };
 
     models = {
@@ -49,35 +43,107 @@
           apiKey = "\${MISTRAL_API_KEY}";
 
           models = [
-            {
-              id = "mistral-vibe-cli-latest";
-              name = "Mistral Vibe CLI Latest";
-            }
-            {
-              id = "mistral-vibe-cli-with-tools";
-              name = "Mistral Vibe CLI With Tools";
-            }
+            { id = "mistral-vibe-cli-latest";      name = "Mistral Vibe CLI Latest"; }
+            { id = "mistral-vibe-cli-with-tools";  name = "Mistral Vibe CLI With Tools"; }
           ];
         };
+      };
+    };
+
+    # Built-in web tools config (web_fetch is enabled by default unless disabled)
+    # If your OpenClaw build supports searxng provider (see upstream PR), you can do:
+    tools.web = {
+      # web_fetch settings (optional; defaults are fine)
+      fetch = {
+        enabled = true;
+      };
+
+      # web_search settings
+      search = {
+        enabled = true;
+
+        # Option A (preferred if supported by your current OpenClaw build):
+        # provider = "searxng";
+        # searxng = { baseUrl = "http://10.30.0.103:8888"; };
+
+        # Option B (always supported per docs): provider "brave" or "perplexity"
+        # provider = "brave";
       };
     };
 
     agents.defaults = {
       userTimezone = "Europe/Helsinki";
 
-      model = {
-        primary = "mistral/mistral-vibe-cli-latest";
-      };
+      # keep your existing aliases
+      model.primary = "mistral/mistral-vibe-cli-latest";
 
       models = {
-        "mistral/mistral-vibe-cli-latest" = {
-          alias = "vibe";
+        "mistral/mistral-vibe-cli-latest" = { alias = "vibe"; };
+        "mistral/mistral-vibe-cli-with-tools" = { alias = "vibe-with-tools"; };
+      };
+
+      groupChat = { mentionPatterns = [ "@openclaw" ]; };
+    };
+
+    agents.list = [
+      {
+        id = "main";
+        default = true;
+        name = "Main";
+        workspace = "~/.openclaw/workspace";
+
+        tools = {
+          profile = "messaging";
+          deny = [
+            "group:automation"
+            "group:runtime"
+            "group:fs"
+            "group:web"
+            "sessions_spawn"
+          ];
+          exec = { security = "deny"; ask = "always"; };
+          elevated = { enabled = false; };
         };
 
-        "mistral/mistral-vibe-cli-with-tools" = {
-          alias = "vibe-with-tools";
+        model.primary = "mistral/mistral-vibe-cli-latest";
+      }
+
+      {
+        id = "research";
+        name = "Research";
+        workspace = "~/.openclaw/workspace-research";
+
+        # Research: web_search + web_fetch allowed, no exec/runtime.
+        tools = {
+          profile = "full";
+          deny = [
+            "group:automation"
+            "group:runtime"
+            "group:fs"
+            "sessions_spawn"
+          ];
+          allow = [ "web_search" "web_fetch" ];
+          exec = { security = "deny"; ask = "always"; };
+          elevated = { enabled = false; };
         };
-      };
-    };
+
+        # typically use with-tools here (if you want tool-calling bias)
+        model.primary = "mistral/mistral-vibe-cli-with-tools";
+      }
+
+      {
+        id = "coder";
+        name = "Coder";
+        workspace = "~/.openclaw/workspace-coder";
+
+        # Coder: runtime tools allowed, but you’ll enforce sandbox via your systemd hardening + (optional) OpenClaw sandbox config.
+        tools = {
+          profile = "coding";
+          deny = [ "group:automation" ];
+        };
+
+        model.primary = "mistral/mistral-vibe-cli-with-tools";
+      }
+    ];
   };
 }

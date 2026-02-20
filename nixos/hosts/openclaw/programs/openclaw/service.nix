@@ -5,6 +5,18 @@ let
 
   openclawPkgs = inputs.nix-openclaw.packages.${pkgs.stdenv.hostPlatform.system};
 
+  pluginRegistry = import ./plugins/default.nix { inherit pkgs inputs; };
+
+  templatesDir = ./workspace-templates;
+  skillsCatalog = "${inputs.openclaw-skills}/skills";
+
+  # Derive absolute workspaces under stateDir (HOME is stateDir)
+  agents = [
+    { id = "main";     workspace = "${cfg.stateDir}/.openclaw/workspace"; }
+    { id = "research"; workspace = "${cfg.stateDir}/.openclaw/workspace-research"; }
+    { id = "coder";    workspace = "${cfg.stateDir}/.openclaw/workspace-coder"; }
+  ];
+
   configTemplate = pkgs.writeText "openclaw.json" (builtins.toJSON cfg.config);
 
   initScript = import ./init.nix {
@@ -13,6 +25,11 @@ let
     group = cfg.group;
     stateDir = cfg.stateDir;
     configTemplate = configTemplate;
+
+    templatesDir = templatesDir;
+    skillsCatalog = skillsCatalog;
+    skillLinks = pluginRegistry.skillLinks;
+    agents = agents;
   };
 
   hardening = (import ./hardening.nix) {
@@ -33,7 +50,9 @@ in
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
 
-      path = [ openclawPkgs.openclaw-tools ];
+      # Put tools + all plugin wrappers on PATH.
+      # NOTE: if you enable Docker sandboxing later, skill binaries must exist in the sandbox too.
+      path = [ openclawPkgs.openclaw-tools pkgs.python3 ] ++ pluginRegistry.packages;
 
       serviceConfig =
         {
