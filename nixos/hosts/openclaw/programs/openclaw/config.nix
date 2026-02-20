@@ -62,12 +62,8 @@
       search = {
         enabled = true;
 
-        # Option A (preferred if supported by your current OpenClaw build):
-        # provider = "searxng";
-        # searxng = { baseUrl = "http://10.30.0.103:8888"; };
-
-        # Option B (always supported per docs): provider "brave" or "perplexity"
-        # provider = "brave";
+        provider = "searxng";
+        searxng = { baseUrl = "http://10.30.0.103:8888"; };
       };
     };
 
@@ -82,7 +78,6 @@
         "mistral/mistral-vibe-cli-with-tools" = { alias = "vibe-with-tools"; };
       };
 
-      groupChat = { mentionPatterns = [ "@openclaw" ]; };
     };
 
     agents.list = [
@@ -106,6 +101,10 @@
         };
 
         model.primary = "mistral/mistral-vibe-cli-latest";
+
+        groupChat = {
+          mentionPatterns = [ "@openclaw" "openclaw" ];
+        };
       }
 
       {
@@ -129,6 +128,10 @@
 
         # typically use with-tools here (if you want tool-calling bias)
         model.primary = "mistral/mistral-vibe-cli-with-tools";
+
+        groupChat = {
+          mentionPatterns = [ "@openclaw" "openclaw" ];
+        };
       }
 
       {
@@ -143,6 +146,10 @@
         };
 
         model.primary = "mistral/mistral-vibe-cli-with-tools";
+
+        groupChat = {
+          mentionPatterns = [ "@openclaw" "openclaw" ];
+        };
       }
     ];
   };
