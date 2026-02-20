@@ -53,5 +53,24 @@
         };
       };
     };
+
+    models = {
+      mode = "merge";
+      providers = {
+        mistral = {
+          models = [
+            {
+              id = "mistral-vibe-cli-latest";
+              name = "Mistral Vibe CLI (Devstral 2)";
+              contextWindow = 256000;
+              maxTokens = 8192;
+              reasoning = false;
+              input = [ "text" ];
+              cost = { input = 0; output = 0; cacheRead = 0; cacheWrite = 0; };
+            }
+          ];
+        };
+      };
+    };
   };
 }
