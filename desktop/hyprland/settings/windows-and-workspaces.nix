@@ -1,7 +1,11 @@
 {
   windowrule = [
-    "suppressevent maximize, class:.*"
-    "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+    "match:class .*, suppress_event maximize"
+
+    "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on"
+
+    "match:class ^Moonlight$, workspace 10 silent"
+    "match:class ^com\\.moonlight_stream\\.Moonlight$, workspace 10 silent"
   ];
 
   workspace = [
@@ -15,10 +19,5 @@
     "8, persistent:true"
     "9, persistent:true"
     "10, persistent:true"
-  ];
-
-  windowrulev2 = [
-    "workspace 10 silent, class:^Moonlight$"
-    "workspace 10 silent, class:^com\\.moonlight_stream\\.Moonlight$"
   ];
 }
