@@ -61,9 +61,8 @@
       # web_search settings
       search = {
         enabled = true;
-
-        provider = "searxng";
-        searxng = { baseUrl = "http://10.30.0.103:8888"; };
+        # provider = "searxng";
+        # searxng = { baseUrl = "http://10.30.0.103:8888"; };
       };
     };
 
