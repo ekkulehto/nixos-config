@@ -10,10 +10,10 @@ let
     text = ''
       set -euo pipefail
 
-      if [ -r ${config.age.secrets.openclaw-env.path} ]; then
+      if [ -r "${config.age.secrets.openclaw-env.path}" ]; then
         set -a
-        # shellcheck disable=SC1091 -- runtime agenix path is intentionally sourced when present.
-        . ${config.age.secrets.openclaw-env.path}
+        # shellcheck disable=SC1091
+        . "${config.age.secrets.openclaw-env.path}"
         set +a
       fi
 
