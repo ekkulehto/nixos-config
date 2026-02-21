@@ -56,7 +56,8 @@
     channels.telegram = {
       enabled = true;
       tokenFile = "\${CREDENTIALS_DIRECTORY}/telegram-bot-token";
-      configWrites = false;
+      # Required for Telegram-driven pairing/session state (e.g. subagent spawn auth context).
+      configWrites = true;
       dmPolicy = "allowlist";
       allowFrom = [ 1653058581 ];
       groups = { "*" = { requireMention = true; }; };
