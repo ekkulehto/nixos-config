@@ -7,6 +7,8 @@
 , skillLinks
 , skillsCatalog
 , agents
+, configWrites ? false
+, ...
 }:
 
 pkgs.writeShellScript "openclaw-init" ''
@@ -18,7 +20,14 @@ pkgs.writeShellScript "openclaw-init" ''
   install -d -m 0700 -o ${user} -g ${group} "$oc_state"
 
   # config
-  install -m 0600 -o ${user} -g ${group} ${configTemplate} "$oc_state/openclaw.json"
+  # If config writes are enabled, keep existing runtime-mutated config to preserve
+  # pairing/session metadata written by the gateway.
+  if [ "${if configWrites then "1" else "0"}" = "1" ] && [ -e "$oc_state/openclaw.json" ]; then
+    chown ${user}:${group} "$oc_state/openclaw.json" || true
+    chmod 0600 "$oc_state/openclaw.json" || true
+  else
+    install -m 0600 -o ${user} -g ${group} ${configTemplate} "$oc_state/openclaw.json"
+  fi
 
   # global dirs
   install -d -m 0700 -o ${user} -g ${group} "$oc_state/credentials"
