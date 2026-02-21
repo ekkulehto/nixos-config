@@ -30,6 +30,7 @@ let
     skillsCatalog = skillsCatalog;
     skillLinks = pluginRegistry.skillLinks;
     agents = agents;
+    configWrites = lib.attrByPath [ "channels" "telegram" "configWrites" ] false cfg.config;
   };
 
   # HARDENING: do NOT bake SearXNG IP here anymore (no plaintext IP in Nix code).
