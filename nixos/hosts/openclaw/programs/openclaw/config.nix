@@ -15,13 +15,9 @@
       profile = "messaging";
       deny = [
         "group:automation"
-        "group:runtime"
-        "group:fs"
         "sessions_spawn"
         "sessions_send"
       ];
-      fs = { workspaceOnly = true; };
-      exec = { security = "deny"; ask = "always"; };
       elevated = { enabled = false; };
     };
 
@@ -47,22 +43,6 @@
             { id = "mistral-vibe-cli-with-tools";  name = "Mistral Vibe CLI With Tools"; }
           ];
         };
-      };
-    };
-
-    # Built-in web tools config (web_fetch is enabled by default unless disabled)
-    # If your OpenClaw build supports searxng provider (see upstream PR), you can do:
-    tools.web = {
-      # web_fetch settings (optional; defaults are fine)
-      fetch = {
-        enabled = true;
-      };
-
-      # web_search settings
-      search = {
-        enabled = true;
-        # provider = "searxng";
-        # searxng = { baseUrl = "http://10.30.0.103:8888"; };
       };
     };
 
@@ -95,7 +75,6 @@
             "group:web"
             "sessions_spawn"
           ];
-          exec = { security = "deny"; ask = "always"; };
           elevated = { enabled = false; };
         };
 
@@ -111,17 +90,16 @@
         name = "Research";
         workspace = "~/.openclaw/workspace-research";
 
-        # Research: web_search + web_fetch allowed, no exec/runtime.
         tools = {
           profile = "full";
           deny = [
             "group:automation"
-            "group:runtime"
             "group:fs"
+            "bash"
+            "process"
             "sessions_spawn"
           ];
-          allow = [ "web_search" "web_fetch" ];
-          exec = { security = "deny"; ask = "always"; };
+          allow = [ "exec" "web_fetch" ];
           elevated = { enabled = false; };
         };
 
