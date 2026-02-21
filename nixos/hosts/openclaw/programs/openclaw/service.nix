@@ -10,6 +10,7 @@ let
   templatesDir = ./workspace-templates;
   skillsCatalog = "${inputs.openclaw-skills}/skills";
 
+  # Derive absolute workspaces under stateDir (HOME is stateDir)
   agents = [
     { id = "main";     workspace = "${cfg.stateDir}/.openclaw/workspace"; }
     { id = "research"; workspace = "${cfg.stateDir}/.openclaw/workspace-research"; }
@@ -31,11 +32,13 @@ let
     agents = agents;
   };
 
+  # HARDENING: do NOT bake SearXNG IP here anymore (no plaintext IP in Nix code).
   hardening = (import ./hardening.nix) {
     stateDir = cfg.stateDir;
     searxngAllow = [ ];
   };
 
+  # One-shot: derive private-IP allowlist from SEARXNG_URL and write a transient /run drop-in.
   searxngNetpolicyScript = pkgs.writeShellScript "openclaw-searxng-netpolicy" ''
     set -euo pipefail
 
@@ -56,6 +59,7 @@ if not searx_url:
     print("SEARXNG_URL empty", file=sys.stderr)
     sys.exit(1)
 
+# Accept both full URLs and raw host:port
 if "://" not in searx_url:
     searx_url = "http://" + searx_url
 
@@ -65,6 +69,7 @@ if not host:
     print(f"Could not parse hostname from SEARXNG_URL={searx_url!r}", file=sys.stderr)
     sys.exit(1)
 
+# Resolve host -> IPs
 ips = set()
 try:
     for fam, _, _, _, sockaddr in socket.getaddrinfo(host, None):
@@ -73,6 +78,7 @@ except Exception as e:
     print(f"DNS resolution failed for {host}: {e}", file=sys.stderr)
     sys.exit(1)
 
+# RFC1918 + link-local ranges you deny in hardening.nix
 blocked = [
     ipaddress.ip_network("10.0.0.0/8"),
     ipaddress.ip_network("172.16.0.0/12"),
@@ -87,6 +93,7 @@ for ip in sorted(ips):
     except ValueError:
         continue
     if addr.version != 4:
+        # You can extend this to IPv6 later if needed.
         continue
     if any(addr in net for net in blocked):
         allow_ips.append(str(addr))
@@ -94,6 +101,7 @@ for ip in sorted(ips):
 dropin_dir = "/run/systemd/system/openclaw-gateway.service.d"
 dropin_path = dropin_dir + "/10-searxng-allow.conf"
 
+# If no private IPs, remove drop-in (nothing to allow).
 if not allow_ips:
     try:
         os.remove(dropin_path)
@@ -102,6 +110,7 @@ if not allow_ips:
     sys.exit(0)
 
 os.makedirs(dropin_dir, exist_ok=True)
+
 with open(dropin_path, "w", encoding="utf-8") as f:
     f.write("[Service]\n")
     for ip in allow_ips:
@@ -133,12 +142,17 @@ in
         Type = "oneshot";
         RemainAfterExit = true;
 
+        # Read the same secret env file as the gateway uses
         EnvironmentFile = config.age.secrets.openclaw-env.path;
 
         UMask = "0077";
         NoNewPrivileges = true;
 
+        # Keep strict sandboxing, but allow ONLY the drop-in location to be writable.
+        # ProtectSystem=strict makes the filesystem read-only; ReadWritePaths allow-lists exceptions. :contentReference[oaicite:1]{index=1}
         ProtectSystem = "strict";
+        ReadWritePaths = [ "/run/systemd/system" ];
+
         ProtectHome = true;
         PrivateTmp = true;
         PrivateDevices = true;
@@ -154,6 +168,7 @@ in
       wants = [ "network-online.target" ];
       requires = [ "openclaw-gateway-netpolicy.service" ];
 
+      # Put tools + all plugin wrappers on PATH.
       path = [ openclawPkgs.openclaw-tools pkgs.python3 ] ++ pluginRegistry.packages;
 
       serviceConfig =
