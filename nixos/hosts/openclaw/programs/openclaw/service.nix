@@ -10,7 +10,6 @@ let
   templatesDir = ./workspace-templates;
   skillsCatalog = "${inputs.openclaw-skills}/skills";
 
-  # Derive absolute workspaces under stateDir (HOME is stateDir)
   agents = [
     { id = "main";     workspace = "${cfg.stateDir}/.openclaw/workspace"; }
     { id = "research"; workspace = "${cfg.stateDir}/.openclaw/workspace-research"; }
@@ -34,8 +33,85 @@ let
 
   hardening = (import ./hardening.nix) {
     stateDir = cfg.stateDir;
-    searxngAllow = [ "10.30.0.103/32" ];
+    searxngAllow = [ ];
   };
+
+  searxngNetpolicyScript = pkgs.writeShellScript "openclaw-searxng-netpolicy" ''
+    set -euo pipefail
+
+    if [ -z "''${SEARXNG_URL:-}" ]; then
+      echo "SEARXNG_URL is not set in EnvironmentFile; cannot derive IPAddressAllow." >&2
+      exit 1
+    fi
+
+    python3 - <<'PY'
+import ipaddress
+import os
+import socket
+import sys
+from urllib.parse import urlparse
+
+searx_url = os.environ.get("SEARXNG_URL", "").strip()
+if not searx_url:
+    print("SEARXNG_URL empty", file=sys.stderr)
+    sys.exit(1)
+
+if "://" not in searx_url:
+    searx_url = "http://" + searx_url
+
+u = urlparse(searx_url)
+host = u.hostname
+if not host:
+    print(f"Could not parse hostname from SEARXNG_URL={searx_url!r}", file=sys.stderr)
+    sys.exit(1)
+
+ips = set()
+try:
+    for fam, _, _, _, sockaddr in socket.getaddrinfo(host, None):
+        ips.add(sockaddr[0])
+except Exception as e:
+    print(f"DNS resolution failed for {host}: {e}", file=sys.stderr)
+    sys.exit(1)
+
+blocked = [
+    ipaddress.ip_network("10.0.0.0/8"),
+    ipaddress.ip_network("172.16.0.0/12"),
+    ipaddress.ip_network("192.168.0.0/16"),
+    ipaddress.ip_network("169.254.0.0/16"),
+]
+
+allow_ips = []
+for ip in sorted(ips):
+    try:
+        addr = ipaddress.ip_address(ip)
+    except ValueError:
+        continue
+    if addr.version != 4:
+        continue
+    if any(addr in net for net in blocked):
+        allow_ips.append(str(addr))
+
+dropin_dir = "/run/systemd/system/openclaw-gateway.service.d"
+dropin_path = dropin_dir + "/10-searxng-allow.conf"
+
+if not allow_ips:
+    try:
+        os.remove(dropin_path)
+    except FileNotFoundError:
+        pass
+    sys.exit(0)
+
+os.makedirs(dropin_dir, exist_ok=True)
+with open(dropin_path, "w", encoding="utf-8") as f:
+    f.write("[Service]\n")
+    for ip in allow_ips:
+        f.write(f"IPAddressAllow={ip}/32\n")
+
+print(f"Wrote {dropin_path} allowing: {', '.join(allow_ips)}")
+PY
+
+    systemctl daemon-reload
+  '';
 in
 {
   config = lib.mkIf cfg.enable {
@@ -44,14 +120,40 @@ in
       "d ${cfg.stateDir}/.openclaw 0700 ${cfg.user} ${cfg.group} - -"
     ];
 
-    systemd.services.openclaw-gateway = {
-      description = "OpenClaw gateway (system)";
+    systemd.services.openclaw-gateway-netpolicy = {
+      description = "OpenClaw gateway netpolicy (derive SearXNG IPAddressAllow from SEARXNG_URL)";
       wantedBy = [ "multi-user.target" ];
+      before = [ "openclaw-gateway.service" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
 
-      # Put tools + all plugin wrappers on PATH.
-      # NOTE: if you enable Docker sandboxing later, skill binaries must exist in the sandbox too.
+      path = [ pkgs.python3 pkgs.systemd pkgs.coreutils ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+
+        EnvironmentFile = config.age.secrets.openclaw-env.path;
+
+        UMask = "0077";
+        NoNewPrivileges = true;
+
+        ProtectSystem = "strict";
+        ProtectHome = true;
+        PrivateTmp = true;
+        PrivateDevices = true;
+      };
+
+      script = "${searxngNetpolicyScript}";
+    };
+
+    systemd.services.openclaw-gateway = {
+      description = "OpenClaw gateway (system)";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target" "openclaw-gateway-netpolicy.service" ];
+      wants = [ "network-online.target" ];
+      requires = [ "openclaw-gateway-netpolicy.service" ];
+
       path = [ openclawPkgs.openclaw-tools pkgs.python3 ] ++ pluginRegistry.packages;
 
       serviceConfig =
