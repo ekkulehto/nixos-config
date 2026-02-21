@@ -107,11 +107,10 @@
           profile = "messaging";
 
           # Orkestroija tarvitsee tämän, muuten ei voi delegoida researchille.
-          allow = [ "sessions_spawn" "agents_list" ];
+          allow = [ "sessions_spawn" "agents_list" "exec" ];
 
           deny = [
             "group:automation"
-            "group:runtime"
             "group:fs"
             "group:web"
           ];

@@ -43,8 +43,10 @@ let
     set -euo pipefail
 
     if [ -z "''${SEARXNG_URL:-}" ]; then
-      echo "SEARXNG_URL is not set in EnvironmentFile; cannot derive IPAddressAllow." >&2
-      exit 1
+      echo "SEARXNG_URL is not set; skipping transient SearXNG IPAddressAllow drop-in."
+      rm -f /run/systemd/system/openclaw-gateway.service.d/10-searxng-allow.conf
+      systemctl daemon-reload
+      exit 0
     fi
 
     python3 - <<'PY'
@@ -165,8 +167,7 @@ in
       description = "OpenClaw gateway (system)";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" "openclaw-gateway-netpolicy.service" ];
-      wants = [ "network-online.target" ];
-      requires = [ "openclaw-gateway-netpolicy.service" ];
+      wants = [ "network-online.target" "openclaw-gateway-netpolicy.service" ];
 
       # Put tools + all plugin wrappers on PATH.
       path = [ openclawPkgs.openclaw-tools pkgs.python3 ] ++ pluginRegistry.packages;

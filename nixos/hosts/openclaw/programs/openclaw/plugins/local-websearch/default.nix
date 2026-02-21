@@ -43,6 +43,7 @@ in
   inherit skillDir;
   package = searxng_search;
 
-  # Only link this skill into research agent workspace
-  targets = [ "research" ];
+  # Link into main + research so Telegram/default agent can use it directly,
+  # while research can still use it when delegated.
+  targets = [ "main" "research" ];
 }
