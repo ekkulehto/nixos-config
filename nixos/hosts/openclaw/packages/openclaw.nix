@@ -12,10 +12,7 @@ let
 
       if [ -r ${config.age.secrets.openclaw-env.path} ]; then
         set -a
-<<<<<<< ours
-=======
         # shellcheck disable=SC1091 -- runtime agenix path is intentionally sourced when present.
->>>>>>> theirs
         . ${config.age.secrets.openclaw-env.path}
         set +a
       fi
